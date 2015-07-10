@@ -12,6 +12,7 @@ namespace BookHelper
 
             var left = book.HowManyPagesLeft();
             Console.WriteLine("Left: " + left);
+            Console.ReadLine();
         }
     }
 }

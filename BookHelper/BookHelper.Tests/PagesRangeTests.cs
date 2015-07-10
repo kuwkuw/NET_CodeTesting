@@ -17,5 +17,14 @@ namespace BookHelper.Tests
         }
 
         // TODO 1: Write test that checks that "from" should be less or equal than "to". Fix the code if test fails.
+        [Test]
+        [TestCase(5, 3)]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Ctr_When_from_larger_than_to_Then_throws_exeption(int from, int to)
+        {
+            //Act
+            new PagesRange(from, to);
+        }
+
     }
 }
