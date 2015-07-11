@@ -56,3 +56,4 @@ using System.Windows;
 
 
 [assembly: InternalsVisibleTo("Cashbox.Tests")]
+[assembly: InternalsVisibleTo("Cashbox.Specs")]
