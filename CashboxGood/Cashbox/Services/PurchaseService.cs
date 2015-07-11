@@ -79,14 +79,18 @@ namespace Cashbox.Services
                 if (total > account.Balance)
                     throw new PurchaseException(PurchaseError.NotEnoughMoney, "Not enough money!");
 
+
                 // Create an order.
                 uow.Repository<Order>().Add(new Order { Account = account, Date = DateTime.Now, Total = total });
 
-                // Update amount of each selected product.
+                // Update amount of each selected product and account balance.
                 var products = uow.Repository<Product>().Query().Where(x => productIds.Contains(x.Id)).ToList();
                 foreach (var product in products)
                 {
+                    if(product.Amount==0)
+                        throw new PurchaseException(PurchaseError.NotEnoughAmount, "Not enough amount!");
                     product.Amount--;
+                    account.Balance -= product.Price;
                 }
 
                 uow.SaveChanges();
